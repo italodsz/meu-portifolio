@@ -1,0 +1,172 @@
+{
+  "Meta": {
+    "title": "Ítalo de Souza — Desenvolvedor Fullstack",
+    "description": "Portfólio de Ítalo de Souza, desenvolvedor de software fullstack em Campinas. Produtos web e mobile de ponta a ponta, do banco de dados à última animação.",
+    "ogAlt": "Ítalo de Souza — Desenvolvedor de Software Fullstack",
+    "role": "Desenvolvedor de Software Fullstack"
+  },
+  "Nav": {
+    "skip": "Pular para o conteúdo",
+    "home": "Início",
+    "about": "Sobre",
+    "manifesto": "Manifesto",
+    "projects": "Projetos",
+    "stack": "Stack",
+    "github": "GitHub",
+    "contact": "Contato",
+    "primary": "Navegação principal",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "switchLocale": "Mudar idioma para inglês",
+    "themeToDark": "Ativar tema escuro",
+    "themeToLight": "Ativar tema claro",
+    "logoLabel": "Ítalo de Souza — voltar ao início"
+  },
+  "Preloader": {
+    "loading": "Carregando"
+  },
+  "Hero": {
+    "statusAvailable": "Disponível para novos desafios",
+    "statusUnavailable": "Focado em projetos atuais",
+    "titleLine1": "Mirando na lua.",
+    "titleLine2": "Construindo entre as estrelas.",
+    "subtitle": "Oi, eu sou o Ítalo — desenvolvedor fullstack em Campinas. Construo produtos web e mobile de ponta a ponta, do banco de dados à última animação.",
+    "ctaProjects": "Ver projetos",
+    "ctaCv": "Baixar currículo",
+    "instagramLabel": "Instagram de Ítalo",
+    "statsLabel": "Números",
+    "stats": {
+      "repos": "Repositórios públicos",
+      "languages": "Linguagens usadas",
+      "featured": "Projetos em destaque",
+      "spoken": "Idiomas"
+    },
+    "scroll": "Role para baixo"
+  },
+  "About": {
+    "label": "Sobre",
+    "titleA": "Código é como as ideias",
+    "titleB": "ganham forma.",
+    "bio": "Sou estudante de Sistemas de Informação na PUC-Campinas e desenvolvedor fullstack. Gosto de construir de ponta a ponta — de APIs e bancos de dados a interfaces web e mobile com atenção aos detalhes. Já desenvolvi um app com IA integrada, uma plataforma com chat em tempo real e automações de análise de documentos com OCR. Sou movido por determinação e pela vontade constante de descobrir até onde consigo chegar.",
+    "photoAlt": "Foto de Ítalo de Souza",
+    "educationTitle": "Formação",
+    "languagesTitle": "Idiomas",
+    "education": [
+      {
+        "period": "2024 — 2027",
+        "institution": "PUC-Campinas",
+        "course": "Bacharelado em Sistemas de Informação"
+      }
+    ],
+    "languages": [
+      { "name": "Português", "level": "Nativo" },
+      { "name": "Inglês", "level": "Fluente" },
+      { "name": "Espanhol", "level": "Intermediário" }
+    ]
+  },
+  "Manifesto": {
+    "label": "Manifesto",
+    "title": "Manifesto",
+    "paragraphs": [
+      "Sou uma pessoa movida por [[determinação]], [[evolução]] e pela vontade constante de descobrir até onde sou capaz de chegar.",
+      "Acredito que grandes resultados raramente são fruto apenas de talento. Eles vêm da [[disciplina]], da [[curiosidade]], da capacidade de aprender, de errar, ajustar e continuar. Por isso, procuro encarar cada novo desafio como uma oportunidade de me desenvolver, ampliar meus conhecimentos e me tornar uma versão mais preparada de mim mesmo.",
+      "Tenho ambição, mas não apenas no sentido de alcançar cargos, reconhecimento ou resultados. Para mim, sucesso também significa poder olhar para a minha trajetória e ter a certeza de que não me acomodei diante do meu próprio potencial.",
+      "Meu maior objetivo é chegar a um ponto da vida em que eu possa olhar para trás e sentir que realmente me esforcei no meu limite, não no limite definido pelos outros, mas naquele que representa quem eu sou, o que acredito e aquilo que sou capaz de construir.",
+      "Quero ter a satisfação de saber que [[tentei de verdade]]. Que aceitei desafios mesmo quando existia a possibilidade de falhar. Que continuei aprendendo quando ainda não sabia o suficiente. Que busquei oportunidades maiores mesmo quando seria mais confortável permanecer onde estava.",
+      "Não espero que todo caminho seja fácil, nem que toda tentativa dê certo. Acredito que erros, dificuldades e fracassos fazem parte de qualquer trajetória que realmente valha a pena. O que importa é continuar avançando, absorvendo cada experiência e transformando esforço em [[evolução]].",
+      "Tenho muito a aprender, muito a construir e objetivos cada vez maiores para perseguir.",
+      "No fim, minha medida de sucesso é simples: saber que fui o mais longe que pude com aquilo que estava ao meu alcance e que nunca deixei de tentar [[ir além]]."
+    ],
+    "quote": "Shoot for the moon. Even if you miss, you'll land among the stars.",
+    "quoteAuthor": "Les Brown",
+    "progress": "Leitura"
+  },
+  "Projects": {
+    "label": "Projetos",
+    "titleA": "Trabalhos",
+    "titleB": "selecionados.",
+    "team": "Projeto em equipe",
+    "soon": "Em breve mais detalhes",
+    "view": "Ver",
+    "openProject": "Abrir projeto {title}",
+    "coverAlt": "Capa do projeto {title}",
+    "detail": {
+      "back": "Voltar aos projetos",
+      "overview": "Visão geral",
+      "context": "Contexto",
+      "problem": "Problema",
+      "solution": "Solução",
+      "features": "Funcionalidades",
+      "stack": "Stack",
+      "role": "Meu papel",
+      "gallery": "Galeria",
+      "links": "Links",
+      "repo": "Repositório",
+      "demo": "Ver online",
+      "noLinks": "Os links deste projeto serão publicados em breve.",
+      "next": "Próximo projeto",
+      "category": "Categoria",
+      "team": "Equipe",
+      "solo": "Individual",
+      "galleryAlt": "{title} — imagem {index}"
+    }
+  },
+  "Stack": {
+    "label": "Stack",
+    "titleA": "Ferramentas que",
+    "titleB": "domino.",
+    "marqueeLabel": "Tecnologias que uso",
+    "groups": {
+      "frontend": "Front-end",
+      "mobile": "Mobile",
+      "backend": "Back-end",
+      "databases": "Bancos de dados",
+      "ai": "IA & Dados",
+      "others": "Outros"
+    }
+  },
+  "GitHub": {
+    "label": "GitHub",
+    "titleA": "Código aberto,",
+    "titleB": "ao vivo.",
+    "intro": "Dados reais da minha conta no GitHub, atualizados a cada hora.",
+    "repos": "Repositórios públicos",
+    "followers": "Seguidores",
+    "since": "No GitHub desde",
+    "languages": "Linguagens mais usadas",
+    "languagesLabel": "Distribuição de linguagens por bytes de código",
+    "recent": "Repositórios recentes",
+    "updated": "atualizado {time}",
+    "noLanguage": "—",
+    "viewProfile": "Ver perfil no GitHub",
+    "fallbackNotice": "Mostrando dados salvos — a API do GitHub não respondeu agora."
+  },
+  "Contact": {
+    "label": "Contato",
+    "titleA": "Vamos construir",
+    "titleB": "algo incrível",
+    "titleC": "juntos?",
+    "intro": "Aberto a vagas, freelas e boas ideias. A forma mais rápida de falar comigo é por e-mail.",
+    "copy": "Copiar e-mail",
+    "copied": "Copiado!",
+    "email": "E-mail",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "instagram": "Instagram"
+  },
+  "Footer": {
+    "backToTop": "Voltar ao topo",
+    "location": "Localização",
+    "localTime": "Hora local",
+    "rights": "Ítalo de Souza",
+    "country": "Brasil"
+  },
+  "Cursor": {
+    "view": "Ver"
+  },
+  "NotFound": {
+    "title": "Perdido no espaço.",
+    "description": "Esta página não existe ou saiu de órbita.",
+    "back": "Voltar ao início"
+  }
+}

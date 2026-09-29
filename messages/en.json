@@ -1,0 +1,172 @@
+{
+  "Meta": {
+    "title": "Ítalo de Souza — Fullstack Developer",
+    "description": "Portfolio of Ítalo de Souza, a fullstack software developer based in Campinas, Brazil. Web and mobile products built end to end, from the database to the last animation.",
+    "ogAlt": "Ítalo de Souza — Fullstack Software Developer",
+    "role": "Fullstack Software Developer"
+  },
+  "Nav": {
+    "skip": "Skip to content",
+    "home": "Home",
+    "about": "About",
+    "manifesto": "Manifesto",
+    "projects": "Work",
+    "stack": "Stack",
+    "github": "GitHub",
+    "contact": "Contact",
+    "primary": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLocale": "Switch language to Portuguese",
+    "themeToDark": "Switch to dark theme",
+    "themeToLight": "Switch to light theme",
+    "logoLabel": "Ítalo de Souza — back to top"
+  },
+  "Preloader": {
+    "loading": "Loading"
+  },
+  "Hero": {
+    "statusAvailable": "Available for new challenges",
+    "statusUnavailable": "Focused on current projects",
+    "titleLine1": "Aiming for the moon.",
+    "titleLine2": "Building among the stars.",
+    "subtitle": "Hi, I'm Ítalo — a fullstack developer based in Campinas, Brazil. I build web and mobile products end to end, from the database to the last animation.",
+    "ctaProjects": "See my work",
+    "ctaCv": "Download résumé",
+    "instagramLabel": "Ítalo's Instagram",
+    "statsLabel": "Numbers",
+    "stats": {
+      "repos": "Public repositories",
+      "languages": "Languages used",
+      "featured": "Featured projects",
+      "spoken": "Languages spoken"
+    },
+    "scroll": "Scroll down"
+  },
+  "About": {
+    "label": "About",
+    "titleA": "Code is how ideas",
+    "titleB": "take shape.",
+    "bio": "I'm an Information Systems student at PUC-Campinas and a fullstack developer. I enjoy building things end to end — from APIs and databases to web and mobile interfaces crafted with attention to detail. I've built an app with integrated AI, a platform with real-time chat and OCR-based document analysis automations. I'm driven by determination and a constant urge to find out how far I can go.",
+    "photoAlt": "Photo of Ítalo de Souza",
+    "educationTitle": "Education",
+    "languagesTitle": "Languages",
+    "education": [
+      {
+        "period": "2024 — 2027",
+        "institution": "PUC-Campinas",
+        "course": "Bachelor's in Information Systems"
+      }
+    ],
+    "languages": [
+      { "name": "Portuguese", "level": "Native" },
+      { "name": "English", "level": "Fluent" },
+      { "name": "Spanish", "level": "Intermediate" }
+    ]
+  },
+  "Manifesto": {
+    "label": "Manifesto",
+    "title": "Manifesto",
+    "paragraphs": [
+      "I'm driven by [[determination]], [[growth]] and a constant urge to find out how far I can go.",
+      "I believe great results are rarely the product of talent alone. They come from [[discipline]], [[curiosity]] and the ability to learn, fail, adjust and keep going. That's why I see every new challenge as a chance to grow, expand what I know and become a better-prepared version of myself.",
+      "I'm ambitious — but not only in the sense of titles, recognition or results. To me, success also means being able to look back at my path and know for sure that I never settled below my own potential.",
+      "My biggest goal is to reach a point in life where I can look back and feel that I truly pushed to my limit — not the limit others set for me, but the one that reflects who I am, what I believe in and what I'm capable of building.",
+      "I want the satisfaction of knowing I [[really tried]]. That I took on challenges even when failure was possible. That I kept learning when I didn't know enough yet. That I went after bigger opportunities even when staying put would have been more comfortable.",
+      "I don't expect every path to be easy, or every attempt to work out. Mistakes, setbacks and failures are part of any journey worth taking. What matters is to keep moving forward, absorbing every experience and turning effort into [[growth]].",
+      "I have a lot to learn, a lot to build and ever-bigger goals to chase.",
+      "In the end, my measure of success is simple: knowing I went as far as I could with what was within my reach — and that I never stopped trying to [[go further]]."
+    ],
+    "quote": "Shoot for the moon. Even if you miss, you'll land among the stars.",
+    "quoteAuthor": "Les Brown",
+    "progress": "Reading"
+  },
+  "Projects": {
+    "label": "Work",
+    "titleA": "Selected",
+    "titleB": "work.",
+    "team": "Team project",
+    "soon": "More details soon",
+    "view": "View",
+    "openProject": "Open project {title}",
+    "coverAlt": "Cover of the {title} project",
+    "detail": {
+      "back": "Back to work",
+      "overview": "Overview",
+      "context": "Context",
+      "problem": "Problem",
+      "solution": "Solution",
+      "features": "Features",
+      "stack": "Stack",
+      "role": "My role",
+      "gallery": "Gallery",
+      "links": "Links",
+      "repo": "Repository",
+      "demo": "Live demo",
+      "noLinks": "Links for this project will be published soon.",
+      "next": "Next project",
+      "category": "Category",
+      "team": "Team",
+      "solo": "Solo",
+      "galleryAlt": "{title} — image {index}"
+    }
+  },
+  "Stack": {
+    "label": "Stack",
+    "titleA": "Tools I",
+    "titleB": "work with.",
+    "marqueeLabel": "Technologies I use",
+    "groups": {
+      "frontend": "Front-end",
+      "mobile": "Mobile",
+      "backend": "Back-end",
+      "databases": "Databases",
+      "ai": "AI & Data",
+      "others": "Other"
+    }
+  },
+  "GitHub": {
+    "label": "GitHub",
+    "titleA": "Open source,",
+    "titleB": "live.",
+    "intro": "Real data from my GitHub account, refreshed every hour.",
+    "repos": "Public repositories",
+    "followers": "Followers",
+    "since": "On GitHub since",
+    "languages": "Most used languages",
+    "languagesLabel": "Language breakdown by bytes of code",
+    "recent": "Recent repositories",
+    "updated": "updated {time}",
+    "noLanguage": "—",
+    "viewProfile": "View GitHub profile",
+    "fallbackNotice": "Showing saved data — the GitHub API didn't respond just now."
+  },
+  "Contact": {
+    "label": "Contact",
+    "titleA": "Let's build",
+    "titleB": "something great",
+    "titleC": "together?",
+    "intro": "Open to roles, freelance work and good ideas. The fastest way to reach me is by email.",
+    "copy": "Copy email",
+    "copied": "Copied!",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "instagram": "Instagram"
+  },
+  "Footer": {
+    "backToTop": "Back to top",
+    "location": "Location",
+    "localTime": "Local time",
+    "rights": "Ítalo de Souza",
+    "country": "Brazil"
+  },
+  "Cursor": {
+    "view": "View"
+  },
+  "NotFound": {
+    "title": "Lost in space.",
+    "description": "This page doesn't exist or has drifted out of orbit.",
+    "back": "Back to home"
+  }
+}

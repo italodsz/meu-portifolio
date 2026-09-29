@@ -1,0 +1,52 @@
+{
+  "_comment": "Dados usados quando a API do GitHub não responde. Atualize de vez em quando com valores reais (veja o README).",
+  "publicRepos": 6,
+  "followers": 0,
+  "createdAt": "2023-01-01T00:00:00Z",
+  "languages": [
+    { "name": "Java", "bytes": 420000 },
+    { "name": "Jupyter Notebook", "bytes": 260000 },
+    { "name": "TypeScript", "bytes": 180000 },
+    { "name": "Kotlin", "bytes": 150000 },
+    { "name": "JavaScript", "bytes": 90000 },
+    { "name": "CSS", "bytes": 40000 },
+    { "name": "HTML", "bytes": 30000 }
+  ],
+  "recentRepos": [
+    {
+      "name": "meu-portifolio",
+      "url": "https://github.com/italodsz/meu-portifolio",
+      "description": "Portfólio pessoal — Next.js, React Three Fiber e Motion.",
+      "language": "TypeScript",
+      "pushedAt": "2026-09-29T00:00:00Z"
+    },
+    {
+      "name": "SI-PI4-2025-T1-G05",
+      "url": "https://github.com/italodsz/SI-PI4-2025-T1-G05",
+      "description": "Plataforma de consultoria em tempo real.",
+      "language": "Java",
+      "pushedAt": "2025-06-15T00:00:00Z"
+    },
+    {
+      "name": "ProjetoIntegrador05",
+      "url": "https://github.com/italodsz/ProjetoIntegrador05",
+      "description": "Análise de documentos com OCR e IA.",
+      "language": "Jupyter Notebook",
+      "pushedAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "name": "ProjetoIntegrador03-main",
+      "url": "https://github.com/italodsz/ProjetoIntegrador03-main",
+      "description": "Controle de riscos no trabalho — apps Android.",
+      "language": "Kotlin",
+      "pushedAt": "2024-11-20T00:00:00Z"
+    },
+    {
+      "name": "Projeto-Integrador-P2",
+      "url": "https://github.com/italodsz/Projeto-Integrador-P2",
+      "description": "Fúria Fitness — gestão de academia.",
+      "language": "Java",
+      "pushedAt": "2024-06-10T00:00:00Z"
+    }
+  ]
+}

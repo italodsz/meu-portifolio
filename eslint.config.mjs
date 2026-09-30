@@ -12,6 +12,14 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "error",
     },
   },
+  {
+    // Na cena 3D (React Three Fiber) os objetos do three.js são alterados de forma imperativa
+    // dentro do useFrame, que é o padrão recomendado pela biblioteca para não re-renderizar.
+    files: ["components/three/**/*.tsx"],
+    rules: {
+      "react-hooks/immutability": "off",
+    },
+  },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
 ]);
 

@@ -29,7 +29,7 @@ export function HeroContent({ available, stats }: { available: boolean; stats: S
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="relative flex min-h-svh flex-col justify-end pt-[calc(var(--header-h)+2rem)] pb-8 md:pb-10"
+      className="relative flex min-h-svh flex-col justify-end pt-[calc(var(--header-h)+2rem)] pb-8 md:pb-10 portrait:pt-[40svh]"
     >
       <div className="container-site flex flex-col gap-8 md:gap-10">
         <motion.p
@@ -126,10 +126,10 @@ export function HeroContent({ available, stats }: { available: boolean; stats: S
         <motion.div
           {...fadeUp(0.9)}
           aria-hidden="true"
-          className="label-mono absolute top-[42%] right-6 hidden items-center gap-3 text-text-muted [writing-mode:vertical-rl] lg:right-10 xl:flex"
+          className="label-mono absolute right-6 bottom-9 hidden items-center gap-3 text-text-muted lg:right-10 xl:flex"
         >
           {t("scroll")}
-          <span className="relative h-16 w-px overflow-hidden bg-border-strong">
+          <span className="relative h-10 w-px overflow-hidden bg-border-strong">
             <motion.span
               className="absolute inset-x-0 top-0 h-1/2 bg-accent"
               animate={{ y: ["-100%", "200%"] }}

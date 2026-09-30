@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -83,9 +84,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             <ScrollProgress />
             <Header />
             <SceneLoader />
-            <main id="main" tabIndex={-1} className="relative z-10 outline-none">
-              {children}
-            </main>
+            <ViewTransition name="page" default="page-fade">
+              <main id="main" tabIndex={-1} className="relative z-10 outline-none">
+                {children}
+              </main>
+            </ViewTransition>
             <Footer />
             <Cursor />
             <div aria-hidden="true" className="grain" />

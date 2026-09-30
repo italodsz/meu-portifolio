@@ -131,7 +131,7 @@ export function Header() {
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 aria-label={open ? t("closeMenu") : t("openMenu")}
-                className="relative grid size-10 place-items-center rounded-full border border-border transition-colors hover:border-accent lg:hidden"
+                className="relative grid size-10 place-items-center rounded-full border border-border bg-bg/60 backdrop-blur-md transition-colors hover:border-accent lg:hidden"
               >
                 <span
                   aria-hidden="true"

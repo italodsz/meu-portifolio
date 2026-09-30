@@ -28,7 +28,7 @@ export function LocaleSwitch({ className }: { className?: string }) {
       aria-label={t("switchLocale")}
       disabled={pending}
       className={cn(
-        "label-mono relative flex h-10 items-center gap-1 rounded-full border border-border px-3 transition-colors hover:border-accent disabled:opacity-60",
+        "label-mono relative flex h-10 items-center gap-1 rounded-full border border-border bg-bg/60 px-3 backdrop-blur-md transition-colors hover:border-accent disabled:opacity-60",
         className,
       )}
     >

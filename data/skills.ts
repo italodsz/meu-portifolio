@@ -7,6 +7,7 @@ import {
   siFirebase,
   siGit,
   siGithub,
+  siGooglemaps,
   siHtml5,
   siJavascript,
   siJsonwebtokens,
@@ -133,4 +134,15 @@ export const marqueeRows: Tech[][] = [
 
 export function techName(item: Tech, locale: keyof Localized): string {
   return typeof item.name === "string" ? item.name : item.name[locale];
+}
+
+const extraIcons: Record<string, { path: string }> = {
+  "Google Maps": siGooglemaps,
+};
+
+/** Ícone (path SVG) de uma tecnologia pelo nome, se existir. */
+export function techIcon(name: string): string | undefined {
+  const all = [...skillGroups.flatMap((group) => group.items), ...marqueeRows.flat()];
+  const found = all.find((item) => typeof item.name === "string" && item.name === name);
+  return found?.icon ?? extraIcons[name]?.path;
 }

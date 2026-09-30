@@ -13,7 +13,7 @@ export async function Footer() {
     <footer className="relative z-10 border-t border-border">
       <div className="container-site grid gap-10 py-12 md:grid-cols-12 md:gap-6 md:py-16">
         <div className="flex flex-col gap-4 md:col-span-4">
-          <Logo className="text-4xl" />
+          <Logo size="lg" />
           <BackToTop label={t("backToTop")} className="self-start text-text-muted" />
         </div>
 

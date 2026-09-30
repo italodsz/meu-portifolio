@@ -59,9 +59,18 @@
       }
     ],
     "languages": [
-      { "name": "Português", "level": "Nativo" },
-      { "name": "Inglês", "level": "Fluente" },
-      { "name": "Espanhol", "level": "Intermediário" }
+      {
+        "name": "Português",
+        "level": "Nativo"
+      },
+      {
+        "name": "Inglês",
+        "level": "Fluente"
+      },
+      {
+        "name": "Espanhol",
+        "level": "Intermediário"
+      }
     ]
   },
   "Manifesto": {
@@ -139,7 +148,8 @@
     "updated": "atualizado {time}",
     "noLanguage": "—",
     "viewProfile": "Ver perfil no GitHub",
-    "fallbackNotice": "Mostrando dados salvos — a API do GitHub não respondeu agora."
+    "fallbackNotice": "Mostrando dados salvos — a API do GitHub não respondeu agora.",
+    "others": "Outras"
   },
   "Contact": {
     "label": "Contato",

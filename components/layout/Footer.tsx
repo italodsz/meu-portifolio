@@ -6,7 +6,6 @@ import { BackToTop } from "./BackToTop";
 
 export async function Footer() {
   const t = await getTranslations("Footer");
-  const quoteT = await getTranslations("Manifesto");
   const locale = await getLocale();
   const year = new Date().getFullYear();
 
@@ -38,11 +37,7 @@ export async function Footer() {
           </div>
         </dl>
 
-        <div className="flex flex-col gap-4 md:col-span-3 md:items-end md:text-right">
-          <p className="font-mono text-[0.6875rem] leading-relaxed tracking-wide text-text-muted">
-            “{quoteT("quote")}”
-            <br />— {quoteT("quoteAuthor")}
-          </p>
+        <div className="flex flex-col gap-4 md:col-span-3 md:items-end md:justify-end md:text-right">
           <p className="label-mono text-text-muted">
             © {year} · {t("rights")}
           </p>

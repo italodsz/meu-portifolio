@@ -1,8 +1,7 @@
 import { Fragment, type CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Reveal } from "@/components/ui/Reveal";
-import { LitParagraph } from "./LitParagraph";
+import { ManifestoText } from "./ManifestoText";
 import { ManifestoProgress } from "./ManifestoProgress";
 
 type Piece = { text: string; accent: boolean };
@@ -38,6 +37,13 @@ function parseWords(paragraph: string): Word[] {
 export async function Manifesto() {
   const t = await getTranslations("Manifesto");
   const paragraphs = (t.raw("paragraphs") as string[]).map(parseWords);
+  const totalWords = paragraphs.reduce((total, words) => total + words.length, 0);
+  const paragraphsWithOffsets = paragraphs.map((words, paragraphIndex) => ({
+    words,
+    offset: paragraphs
+      .slice(0, paragraphIndex)
+      .reduce((total, previousWords) => total + previousWords.length, 0),
+  }));
 
   return (
     <section id="manifesto" aria-labelledby="manifesto-title" className="relative py-28 md:py-40">
@@ -52,16 +58,19 @@ export async function Manifesto() {
           </div>
         </div>
 
-        <div id="manifesto-text" className="flex flex-col gap-8 md:col-span-9 md:gap-10">
-          {paragraphs.map((words, paragraphIndex) => (
-            <LitParagraph
+        <ManifestoText
+          id="manifesto-text"
+          totalWords={totalWords}
+          className="flex flex-col gap-8 md:col-span-9 md:gap-10"
+        >
+          {paragraphsWithOffsets.map(({ words, offset }, paragraphIndex) => (
+            <p
               key={paragraphIndex}
-              count={words.length}
               className="text-[clamp(1.5rem,2.9vw,2.6rem)] leading-[1.22] font-semibold tracking-[-0.025em] text-pretty"
             >
               {words.map((word, index) => (
                 <Fragment key={index}>
-                  <span className="lit-word" style={{ "--i": index } as CSSProperties}>
+                  <span className="lit-word" style={{ "--i": offset + index } as CSSProperties}>
                     {word.map((piece, pieceIndex) =>
                       piece.accent ? (
                         <span key={pieceIndex} className="lit-accent">
@@ -74,20 +83,9 @@ export async function Manifesto() {
                   </span>{" "}
                 </Fragment>
               ))}
-            </LitParagraph>
+            </p>
           ))}
-
-          <Reveal className="mt-10 border-t border-border pt-10 md:mt-16 md:pt-14">
-            <figure className="flex flex-col gap-6">
-              <blockquote className="title-md max-w-[22ch] text-balance">
-                <span className="text-accent">“</span>
-                {t("quote")}
-                <span className="text-accent">”</span>
-              </blockquote>
-              <figcaption className="label-mono text-text-muted">— {t("quoteAuthor")}</figcaption>
-            </figure>
-          </Reveal>
-        </div>
+        </ManifestoText>
       </div>
     </section>
   );

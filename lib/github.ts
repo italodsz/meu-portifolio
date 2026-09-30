@@ -151,6 +151,7 @@ async function fetchLive(): Promise<GitHubData> {
  * Cache de 1 hora (ISR); se a API falhar, devolve os dados locais de fallback.
  */
 export const getGitHubData = cache(async (): Promise<GitHubData> => {
+  if (!siteConfig.features.githubLive) return fallbackData();
   try {
     return await fetchLive();
   } catch (error) {

@@ -4,22 +4,21 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { scroll } from "motion";
 
 /**
- * Parágrafo do manifesto. O progresso de leitura fica na variável CSS --p (0 a 1) e cada
- * palavra calcula a própria opacidade a partir dela (ver .lit-word em globals.css).
- *
- * Onde o navegador suporta scroll-driven animations, --p é animado só com CSS
- * (animation-timeline: view()). Nos outros, este componente atualiza --p via JS.
+ * Uma única linha de progresso controla todas as palavras do manifesto. Isso impede que o
+ * parágrafo seguinte comece a acender antes de o anterior terminar.
  */
-export function LitParagraph({
-  count,
+export function ManifestoText({
+  id,
+  totalWords,
   className,
   children,
 }: {
-  count: number;
+  id: string;
+  totalWords: number;
   className?: string;
   children: ReactNode;
 }) {
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -36,12 +35,13 @@ export function LitParagraph({
   }, []);
 
   return (
-    <p
+    <div
       ref={ref}
-      className={`lit-para ${className ?? ""}`}
-      style={{ "--n": count } as CSSProperties}
+      id={id}
+      className={`lit-manifesto ${className ?? ""}`}
+      style={{ "--n": totalWords } as CSSProperties}
     >
       {children}
-    </p>
+    </div>
   );
 }

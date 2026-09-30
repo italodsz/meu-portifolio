@@ -1,11 +1,17 @@
+import { siteConfig } from "@/config/site";
+
 /** Seções da home, na ordem em que aparecem. Os ids são usados como âncoras. */
-export const SECTIONS = [
+const ALL_SECTIONS = [
   { id: "about", key: "about", number: "01" },
   { id: "manifesto", key: "manifesto", number: "02" },
   { id: "projects", key: "projects", number: "03" },
   { id: "stack", key: "stack", number: "04" },
   { id: "github", key: "github", number: "05" },
-  { id: "contact", key: "contact", number: "06" },
+  { id: "contact", key: "contact", number: siteConfig.features.githubLive ? "06" : "05" },
 ] as const;
+
+export const SECTIONS = ALL_SECTIONS.filter(
+  (section) => section.id !== "github" || siteConfig.features.githubLive,
+);
 
 export type SectionId = (typeof SECTIONS)[number]["id"];

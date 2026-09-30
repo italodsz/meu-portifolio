@@ -20,6 +20,10 @@ export const siteConfig = {
     /** true = selo verde "Disponível para novos desafios"; false = selo neutro. */
     available: true,
   },
+  features: {
+    /** Mantém a seção e as chamadas ao GitHub prontas para reativação futura. */
+    githubLive: false,
+  },
   github: { username: "italodsz" },
   cvPath: "/cv/italo-de-souza-curriculo.pdf",
   photo: "/images/italo.jpg",

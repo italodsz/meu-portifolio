@@ -464,7 +464,7 @@ html[data-theme-switch]::view-transition-new(root) {
   }
 }
 
-/* Manifesto: palavra apagada que acende com o scroll (--p do parágrafo, --n total, --i índice). */
+/* Manifesto: palavras acendem em uma sequência global (--p progresso, --n total, --i índice). */
 @property --p {
   syntax: "<number>";
   inherits: true;
@@ -472,10 +472,10 @@ html[data-theme-switch]::view-transition-new(root) {
 }
 
 @supports (animation-timeline: view()) {
-  .lit-para {
+  .lit-manifesto {
     animation: lit-progress linear both;
     animation-timeline: view();
-    /* 0 quando o topo chega a 88% da tela; 1 quando o fim passa de 60%. */
+    /* Uma única progressão percorre todos os parágrafos em ordem. */
     animation-range: cover 12vh cover calc(100% - 60vh);
   }
 }
@@ -503,7 +503,7 @@ html[data-theme-switch]::view-transition-new(root) {
     --lit: 1;
   }
 
-  .lit-para {
+  .lit-manifesto {
     animation: none;
   }
 }

@@ -8,10 +8,7 @@ import { siteConfig } from "@/config/site";
 
 export async function Contact() {
   const t = await getTranslations("Contact");
-  const quoteT = await getTranslations("Manifesto");
   const { contact } = siteConfig;
-  const quote = quoteT("quote");
-  const accentWords = new Set(["moon", "stars", "lua", "estrelas"]);
 
   return (
     <section
@@ -20,7 +17,7 @@ export async function Contact() {
       className="relative pt-28 pb-20 md:pt-40 md:pb-28"
     >
       <div className="container-site flex flex-col gap-12 md:gap-16">
-        <SectionLabel number="06" label={t("label")} />
+        <SectionLabel number={siteConfig.features.githubLive ? "06" : "05"} label={t("label")} />
         <RevealLetters
           id="contact-title"
           className="title-xl"
@@ -71,27 +68,6 @@ export async function Contact() {
               />
             </li>
           </ul>
-        </Reveal>
-
-        <Reveal className="flex flex-col items-center gap-5 pt-16 text-center md:pt-24">
-          <figure className="flex flex-col items-center gap-5">
-            <blockquote className="text-[clamp(1.5rem,3.4vw,3rem)] leading-tight font-semibold tracking-tight text-balance">
-              “
-              {quote.split(/(moon|stars|lua|estrelas)/gi).map((part, index) =>
-                accentWords.has(part.toLowerCase()) ? (
-                  <span key={index} className="text-accent">
-                    {part}
-                  </span>
-                ) : (
-                  part
-                ),
-              )}
-              ”
-            </blockquote>
-            <figcaption className="label-mono text-text-muted">
-              — {quoteT("quoteAuthor")}
-            </figcaption>
-          </figure>
         </Reveal>
       </div>
     </section>

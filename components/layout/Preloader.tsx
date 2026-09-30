@@ -1,82 +1,96 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { animate, motion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useLenis } from "lenis/react";
 import { markIntroDone, PRELOADER_KEY } from "@/lib/intro";
-import { EASE } from "@/lib/utils";
 
-const COUNT_DURATION = 1.25;
-const CURTAIN_DURATION = 0.8;
 const noop = () => () => {};
 
+/** Já rodou nesta página (ex.: ao trocar de idioma o layout remonta, mas não repetimos). */
+let shownThisPage = false;
+
+const LIFT_ANIMATION = "preloader-lift";
+
 /**
- * Contador 000 → 100 e cortina vermelha que sobe revelando o hero.
- * Só na primeira visita da sessão; pulado com prefers-reduced-motion (ver script inline no layout).
- * Duração total ≈ 2,1 s.
+ * Contador 000 → 100 e cortina vermelha que sobe revelando o hero (≈ 2 s no total).
+ *
+ * A animação é 100% CSS (ver .preloader em globals.css), então começa na primeira pintura,
+ * sem esperar o JavaScript. Este componente só:
+ * - sincroniza a revelação do hero com o início da subida da cortina;
+ * - trava o scroll enquanto a cortina está na tela;
+ * - marca a sessão para não repetir o preloader.
+ * Só na primeira visita da sessão; pulado com prefers-reduced-motion (script inline no layout).
  */
 export function Preloader() {
   const t = useTranslations("Preloader");
-  const counterRef = useRef<HTMLSpanElement>(null);
-  const [phase, setPhase] = useState<"count" | "lift" | "done">("count");
-  // Lido uma vez na hidratação: o script inline marca <html data-preloaded> quando deve pular.
+  const ref = useRef<HTMLDivElement>(null);
+  const [done, setDone] = useState(false);
+  const lenis = useLenis();
+  // O script inline marca <html data-preloaded> quando o preloader deve ser pulado.
   const skip = useSyncExternalStore(
     noop,
-    () => Boolean(document.documentElement.dataset.preloaded),
+    () => Boolean(document.documentElement.dataset.preloaded) || shownThisPage,
     () => false,
   );
 
+  // Trava o scroll (Lenis no desktop; wheel/touch no mobile) enquanto a cortina cobre a tela.
   useEffect(() => {
-    if (skip) return;
-    const lenisRoot = document.documentElement;
-    lenisRoot.style.overflow = "hidden";
-
-    const controls = animate(0, 100, {
-      duration: COUNT_DURATION,
-      ease: [0.65, 0, 0.35, 1],
-      onUpdate: (value) => {
-        if (counterRef.current)
-          counterRef.current.textContent = String(Math.round(value)).padStart(3, "0");
-      },
-      onComplete: () => {
-        setPhase("lift");
-        markIntroDone();
-        try {
-          sessionStorage.setItem(PRELOADER_KEY, "1");
-        } catch {}
-      },
-    });
+    if (skip || done) return;
+    lenis?.stop();
+    const block = (event: Event) => event.preventDefault();
+    window.addEventListener("wheel", block, { passive: false });
+    window.addEventListener("touchmove", block, { passive: false });
     return () => {
-      controls.stop();
-      lenisRoot.style.overflow = "";
+      lenis?.start();
+      window.removeEventListener("wheel", block);
+      window.removeEventListener("touchmove", block);
+    };
+  }, [skip, done, lenis]);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (skip || !element) return;
+
+    const finish = () => {
+      shownThisPage = true;
+      markIntroDone();
+      try {
+        sessionStorage.setItem(PRELOADER_KEY, "1");
+      } catch {}
+      setDone(true);
+    };
+
+    const lift = element
+      .getAnimations()
+      .find((animation) => (animation as CSSAnimation).animationName === LIFT_ANIMATION);
+    if (!lift) {
+      // Navegador sem suporte à animação: libera o hero direto.
+      finish();
+      return;
+    }
+
+    // Revela o hero quando a cortina começa a subir (ou já, se a hidratação chegou tarde).
+    const delay = Number(lift.effect?.getTiming().delay ?? 0);
+    const elapsed = Number(lift.currentTime ?? 0);
+    let timer: number | undefined;
+    if (elapsed >= delay) markIntroDone();
+    else timer = window.setTimeout(markIntroDone, delay - elapsed);
+
+    let cancelled = false;
+    lift.finished.then(() => !cancelled && finish()).catch(() => {});
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
     };
   }, [skip]);
 
-  if (skip || phase === "done") return null;
+  if (skip || done) return null;
 
   return (
-    <motion.div
-      className="preloader fixed inset-0 z-[100] flex items-end justify-between bg-accent p-4 text-on-accent sm:p-8"
-      initial={{ y: "0%" }}
-      animate={phase === "lift" ? { y: "-100%" } : { y: "0%" }}
-      transition={{ duration: CURTAIN_DURATION, ease: EASE, delay: 0.05 }}
-      onAnimationComplete={() => {
-        if (phase === "lift") {
-          document.documentElement.style.overflow = "";
-          document.documentElement.dataset.preloaded = "1";
-          setPhase("done");
-        }
-      }}
-      role="status"
-      aria-live="polite"
-    >
+    <div ref={ref} className="preloader" role="status" aria-live="polite">
       <span className="label-mono">{t("loading")}</span>
-      <span
-        ref={counterRef}
-        className="font-mono text-[clamp(4rem,18vw,14rem)] leading-none font-medium tracking-tighter tabular-nums"
-      >
-        000
-      </span>
-    </motion.div>
+      <span className="preloader-count" aria-hidden="true" />
+    </div>
   );
 }

@@ -1,42 +1,14 @@
 import type { Localized } from "@/lib/i18n";
-import {
-  siAndroid,
-  siC,
-  siCss,
-  siExpo,
-  siFirebase,
-  siGit,
-  siGithub,
-  siGooglemaps,
-  siHtml5,
-  siJavascript,
-  siJsonwebtokens,
-  siJupyter,
-  siKotlin,
-  siMongodb,
-  siMysql,
-  siNextdotjs,
-  siNodedotjs,
-  siOpenjdk,
-  siPostgresql,
-  siPython,
-  siReact,
-  siSocketdotio,
-  siSpringboot,
-  siSupabase,
-  siTailwindcss,
-  siTypescript,
-  siVite,
-} from "simple-icons";
+import type { IconId } from "./icons";
 
 export type Tech = {
   name: string | Localized;
-  /** Path SVG (viewBox 0 0 24 24) do simple-icons; sem ícone, mostramos só o nome. */
-  icon?: string;
+  /** Ícone do sprite (data/icons.ts); sem ícone, mostramos só o nome. */
+  icon?: IconId;
 };
 
-function tech(name: string | Localized, icon?: { path: string }): Tech {
-  return { name, icon: icon?.path };
+function tech(name: string | Localized, icon?: IconId): Tech {
+  return { name, icon };
 }
 
 export type SkillGroupKey = "frontend" | "mobile" | "backend" | "databases" | "ai" | "others";
@@ -50,45 +22,45 @@ export const skillGroups: SkillGroup[] = [
   {
     key: "frontend",
     items: [
-      tech("React", siReact),
-      tech("Next.js", siNextdotjs),
-      tech("TypeScript", siTypescript),
-      tech("JavaScript", siJavascript),
-      tech("HTML", siHtml5),
-      tech("CSS", siCss),
-      tech("Tailwind CSS", siTailwindcss),
+      tech("React", "react"),
+      tech("Next.js", "nextjs"),
+      tech("TypeScript", "typescript"),
+      tech("JavaScript", "javascript"),
+      tech("HTML", "html"),
+      tech("CSS", "css"),
+      tech("Tailwind CSS", "tailwind"),
     ],
   },
   {
     key: "mobile",
-    items: [tech("React Native (Expo)", siExpo), tech("Kotlin", siKotlin)],
+    items: [tech("React Native (Expo)", "expo"), tech("Kotlin", "kotlin")],
   },
   {
     key: "backend",
     items: [
-      tech("Node.js", siNodedotjs),
-      tech("Java", siOpenjdk),
-      tech("Spring Boot", siSpringboot),
+      tech("Node.js", "nodejs"),
+      tech("Java", "java"),
+      tech("Spring Boot", "springboot"),
       tech({ pt: "APIs REST", en: "REST APIs" }),
-      tech("WebSocket", siSocketdotio),
-      tech("JWT", siJsonwebtokens),
+      tech("WebSocket", "websocket"),
+      tech("JWT", "jwt"),
     ],
   },
   {
     key: "databases",
     items: [
-      tech("PostgreSQL", siPostgresql),
-      tech("MySQL", siMysql),
+      tech("PostgreSQL", "postgresql"),
+      tech("MySQL", "mysql"),
       tech("Oracle"),
-      tech("MongoDB Atlas", siMongodb),
-      tech("Supabase", siSupabase),
-      tech("Firebase", siFirebase),
+      tech("MongoDB Atlas", "mongodb"),
+      tech("Supabase", "supabase"),
+      tech("Firebase", "firebase"),
     ],
   },
   {
     key: "ai",
     items: [
-      tech("Python", siPython),
+      tech("Python", "python"),
       tech("LLMs"),
       tech("OCR (Tesseract, Donut)"),
       tech("Power BI"),
@@ -97,38 +69,38 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     key: "others",
-    items: [tech("C", siC), tech("Git", siGit), tech("GitHub", siGithub)],
+    items: [tech("C", "c"), tech("Git", "git"), tech("GitHub", "github")],
   },
 ];
 
 /** Logos das duas faixas do marquee (só tecnologias com ícone). */
 export const marqueeRows: Tech[][] = [
   [
-    tech("React", siReact),
-    tech("Next.js", siNextdotjs),
-    tech("TypeScript", siTypescript),
-    tech("JavaScript", siJavascript),
-    tech("Tailwind CSS", siTailwindcss),
-    tech("HTML", siHtml5),
-    tech("CSS", siCss),
-    tech("Expo", siExpo),
-    tech("Kotlin", siKotlin),
-    tech("Android", siAndroid),
-    tech("Vite", siVite),
+    tech("React", "react"),
+    tech("Next.js", "nextjs"),
+    tech("TypeScript", "typescript"),
+    tech("JavaScript", "javascript"),
+    tech("Tailwind CSS", "tailwind"),
+    tech("HTML", "html"),
+    tech("CSS", "css"),
+    tech("Expo", "expo"),
+    tech("Kotlin", "kotlin"),
+    tech("Android", "android"),
+    tech("Vite", "vite"),
   ],
   [
-    tech("Node.js", siNodedotjs),
-    tech("Java", siOpenjdk),
-    tech("Spring Boot", siSpringboot),
-    tech("PostgreSQL", siPostgresql),
-    tech("MySQL", siMysql),
-    tech("MongoDB", siMongodb),
-    tech("Supabase", siSupabase),
-    tech("Firebase", siFirebase),
-    tech("Python", siPython),
-    tech("Jupyter", siJupyter),
-    tech("Git", siGit),
-    tech("GitHub", siGithub),
+    tech("Node.js", "nodejs"),
+    tech("Java", "java"),
+    tech("Spring Boot", "springboot"),
+    tech("PostgreSQL", "postgresql"),
+    tech("MySQL", "mysql"),
+    tech("MongoDB", "mongodb"),
+    tech("Supabase", "supabase"),
+    tech("Firebase", "firebase"),
+    tech("Python", "python"),
+    tech("Jupyter", "jupyter"),
+    tech("Git", "git"),
+    tech("GitHub", "github"),
   ],
 ];
 
@@ -136,13 +108,13 @@ export function techName(item: Tech, locale: keyof Localized): string {
   return typeof item.name === "string" ? item.name : item.name[locale];
 }
 
-const extraIcons: Record<string, { path: string }> = {
-  "Google Maps": siGooglemaps,
+const extraIcons: Record<string, IconId> = {
+  "Google Maps": "googlemaps",
 };
 
-/** Ícone (path SVG) de uma tecnologia pelo nome, se existir. */
-export function techIcon(name: string): string | undefined {
+/** Ícone de uma tecnologia pelo nome, se existir. */
+export function techIcon(name: string): IconId | undefined {
   const all = [...skillGroups.flatMap((group) => group.items), ...marqueeRows.flat()];
   const found = all.find((item) => typeof item.name === "string" && item.name === name);
-  return found?.icon ?? extraIcons[name]?.path;
+  return found?.icon ?? extraIcons[name];
 }

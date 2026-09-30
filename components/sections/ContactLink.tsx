@@ -4,12 +4,13 @@ import { motion } from "motion/react";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import { BrandIcon } from "@/components/ui/BrandIcon";
+import type { IconId } from "@/data/icons";
 
 type ContactLinkProps = {
   href: string;
   label: string;
   value: string;
-  icon?: string;
+  icon?: IconId;
   external?: boolean;
 };
 
@@ -35,7 +36,7 @@ export function ContactLink({ href, label, value, icon, external = true }: Conta
           {label}
         </span>
         <span className="flex min-w-0 items-center gap-3 text-[clamp(1.35rem,4.2vw,3.25rem)] leading-none font-bold tracking-tight transition-[color,transform] duration-500 group-hover:translate-x-2 group-hover:text-on-accent md:gap-4">
-          {icon && <BrandIcon path={icon} className="size-[0.7em] shrink-0" />}
+          {icon && <BrandIcon id={icon} className="size-[0.7em] shrink-0" />}
           <span className="truncate">{value}</span>
         </span>
       </span>

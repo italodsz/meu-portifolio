@@ -4,7 +4,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, Globe } from "lucide-react";
-import { siGithub } from "simple-icons";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { toLocale } from "@/lib/locale";
@@ -157,7 +156,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
                         className="flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1.5 text-sm"
                       >
                         {icon ? (
-                          <BrandIcon path={icon} className="size-3.5 text-text-muted" />
+                          <BrandIcon id={icon} className="size-3.5 text-text-muted" />
                         ) : (
                           <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
                         )}
@@ -179,7 +178,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
                       rel="noopener noreferrer"
                       className="group inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 font-semibold text-on-accent transition-colors hover:bg-accent-glow"
                     >
-                      <BrandIcon path={siGithub.path} className="size-4" />
+                      <BrandIcon id="github" className="size-4" />
                       {t("detail.repo")}
                       <ArrowUpRight />
                     </a>

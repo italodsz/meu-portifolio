@@ -1,9 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { siGithub, siInstagram } from "simple-icons";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { RevealLetters } from "@/components/ui/RevealLetters";
 import { Reveal } from "@/components/ui/Reveal";
-import { LINKEDIN_PATH } from "@/components/ui/BrandIcon";
 import { ContactLink } from "./ContactLink";
 import { CopyEmail } from "./CopyEmail";
 import { siteConfig } from "@/config/site";
@@ -50,7 +48,7 @@ export async function Contact() {
                 href={contact.linkedin}
                 label={t("linkedin")}
                 value="in/italo-de-souza-s"
-                icon={LINKEDIN_PATH}
+                icon="linkedin"
               />
             </li>
             <li>
@@ -58,7 +56,7 @@ export async function Contact() {
                 href={contact.github}
                 label={t("github")}
                 value="italodsz"
-                icon={siGithub.path}
+                icon="github"
               />
             </li>
             <li>
@@ -66,7 +64,7 @@ export async function Contact() {
                 href={contact.instagram}
                 label={t("instagram")}
                 value={contact.instagramHandle}
-                icon={siInstagram.path}
+                icon="instagram"
               />
             </li>
           </ul>

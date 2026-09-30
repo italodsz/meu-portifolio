@@ -101,11 +101,12 @@ export function Constellation() {
 
   useFrame(({ clock }, rawDelta) => {
     const delta = Math.min(rawDelta, 0.1);
-    const visibility = live.key.constellation;
+    // Só aparece de fato quando a seção Projetos está na tela (não na transição anterior).
+    const visibility = Math.min(1, Math.max(0, (live.key.constellation - 0.6) / 0.4));
     const points = live.aspect < 1 ? MOBILE_POINTS : DESKTOP_POINTS;
 
     // As linhas se desenham quando a seção aparece e "apagam" quando ela sai.
-    if (visibility > 0.55) progress.current = Math.min(1, progress.current + delta / DRAW_SECONDS);
+    if (visibility > 0.5) progress.current = Math.min(1, progress.current + delta / DRAW_SECONDS);
     else if (visibility < 0.05) progress.current = 0;
     const drawn = live.reduced ? (visibility > 0.5 ? 1 : 0) : progress.current;
 

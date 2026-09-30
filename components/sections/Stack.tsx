@@ -54,7 +54,7 @@ export async function Stack() {
                         className="flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1.5 text-sm"
                       >
                         {item.icon ? (
-                          <BrandIcon path={item.icon} className="size-3.5 text-text-muted" />
+                          <BrandIcon id={item.icon} className="size-3.5 text-text-muted" />
                         ) : (
                           <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
                         )}

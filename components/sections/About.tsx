@@ -21,7 +21,11 @@ export async function About() {
 
         <div className="md:col-span-5 lg:col-span-4">
           <div className="md:sticky md:top-28">
-            <AboutPhoto src={siteConfig.photo} alt={t("photoAlt")} />
+            <AboutPhoto
+              src={siteConfig.photo}
+              alt={t("photoAlt")}
+              label={siteConfig.location.city}
+            />
           </div>
         </div>
 

@@ -1,12 +1,9 @@
-"use client";
-
-import { useMemo, useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { useTranslations } from "next-intl";
+import { Fragment, type CSSProperties } from "react";
+import { getTranslations } from "next-intl/server";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { cn } from "@/lib/utils";
+import { LitParagraph } from "./LitParagraph";
+import { ManifestoProgress } from "./ManifestoProgress";
 
 type Piece = { text: string; accent: boolean };
 /** Uma palavra pode ter partes em destaque e partes normais (ex.: "evolução" + ","). */
@@ -34,36 +31,16 @@ function parseWords(paragraph: string): Word[] {
   return words;
 }
 
-function WordPieces({ word }: { word: Word }) {
-  return word.map((piece, index) => (
-    <span key={index} className={cn(piece.accent && "text-accent")}>
-      {piece.text}
-    </span>
-  ));
-}
-
-export function Manifesto() {
-  const t = useTranslations("Manifesto");
-  const paragraphs = t.raw("paragraphs") as string[];
-  const parsed = useMemo(() => paragraphs.map(parseWords), [paragraphs]);
-  const sectionRef = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 0.7", "end 0.8"],
-  });
-  const percent = useTransform(scrollYProgress, (value) =>
-    String(Math.round(Math.min(1, Math.max(0, value)) * 100)).padStart(3, "0"),
-  );
+/**
+ * Manifesto: cada palavra começa apagada (text-dim) e acende para text/accent conforme o scroll.
+ * As palavras são HTML do servidor; só o progresso de cada parágrafo (--p) vem do cliente.
+ */
+export async function Manifesto() {
+  const t = await getTranslations("Manifesto");
+  const paragraphs = (t.raw("paragraphs") as string[]).map(parseWords);
 
   return (
-    <section
-      ref={sectionRef}
-      id="manifesto"
-      aria-labelledby="manifesto-title"
-      className="relative py-28 md:py-40"
-    >
+    <section id="manifesto" aria-labelledby="manifesto-title" className="relative py-28 md:py-40">
       <div className="container-site grid gap-10 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-3">
           <div className="flex flex-col gap-6 md:sticky md:top-28">
@@ -71,26 +48,33 @@ export function Manifesto() {
             <h2 id="manifesto-title" className="sr-only">
               {t("title")}
             </h2>
-            <div aria-hidden="true" className="hidden items-center gap-4 md:flex">
-              <span className="relative h-32 w-px overflow-hidden bg-border-strong">
-                <motion.span
-                  className="absolute inset-0 origin-top bg-accent"
-                  style={{ scaleY: reduced ? 1 : scrollYProgress }}
-                />
-              </span>
-              <span className="label-mono flex flex-col gap-1 text-text-muted">
-                <span>{t("progress")}</span>
-                <span className="text-text tabular-nums">
-                  <motion.span>{percent}</motion.span>%
-                </span>
-              </span>
-            </div>
+            <ManifestoProgress label={t("progress")} targetId="manifesto-text" />
           </div>
         </div>
 
-        <div className="flex flex-col gap-8 md:col-span-9 md:gap-10">
-          {parsed.map((words, index) => (
-            <ManifestoParagraph key={index} words={words} reduced={reduced} />
+        <div id="manifesto-text" className="flex flex-col gap-8 md:col-span-9 md:gap-10">
+          {paragraphs.map((words, paragraphIndex) => (
+            <LitParagraph
+              key={paragraphIndex}
+              count={words.length}
+              className="text-[clamp(1.5rem,2.9vw,2.6rem)] leading-[1.22] font-semibold tracking-[-0.025em] text-pretty"
+            >
+              {words.map((word, index) => (
+                <Fragment key={index}>
+                  <span className="lit-word" style={{ "--i": index } as CSSProperties}>
+                    {word.map((piece, pieceIndex) =>
+                      piece.accent ? (
+                        <span key={pieceIndex} className="lit-accent">
+                          {piece.text}
+                        </span>
+                      ) : (
+                        piece.text
+                      ),
+                    )}
+                  </span>{" "}
+                </Fragment>
+              ))}
+            </LitParagraph>
           ))}
 
           <Reveal className="mt-10 border-t border-border pt-10 md:mt-16 md:pt-14">
@@ -106,56 +90,5 @@ export function Manifesto() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ManifestoParagraph({ words, reduced }: { words: Word[]; reduced: boolean }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.88", "end 0.6"] });
-  const className =
-    "text-[clamp(1.5rem,2.9vw,2.6rem)] leading-[1.22] font-semibold tracking-[-0.025em] text-pretty";
-
-  if (reduced) {
-    return (
-      <p ref={ref} className={className}>
-        {words.map((word, index) => (
-          <span key={index}>
-            <WordPieces word={word} />{" "}
-          </span>
-        ))}
-      </p>
-    );
-  }
-
-  return (
-    <p ref={ref} className={className}>
-      {words.map((word, index) => (
-        <ManifestoWord
-          key={index}
-          word={word}
-          progress={scrollYProgress}
-          range={[index / words.length, (index + 1) / words.length]}
-        />
-      ))}
-    </p>
-  );
-}
-
-function ManifestoWord({
-  word,
-  progress,
-  range,
-}: {
-  word: Word;
-  progress: MotionValue<number>;
-  range: [number, number];
-}) {
-  const opacity = useTransform(progress, range, [0.14, 1]);
-  return (
-    <>
-      <motion.span style={{ opacity }}>
-        <WordPieces word={word} />
-      </motion.span>{" "}
-    </>
   );
 }

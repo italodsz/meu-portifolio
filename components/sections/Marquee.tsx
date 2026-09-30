@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import {
   motion,
+  useInView,
   useAnimationFrame,
   useMotionValue,
   useScroll,
@@ -11,9 +12,10 @@ import {
   useVelocity,
 } from "motion/react";
 import { BrandIcon } from "@/components/ui/BrandIcon";
+import type { IconId } from "@/data/icons";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-export type MarqueeItem = { name: string; icon?: string };
+export type MarqueeItem = { name: string; icon?: IconId };
 
 type MarqueeRowProps = {
   items: MarqueeItem[];
@@ -31,6 +33,8 @@ function wrap(min: number, max: number, value: number) {
 /** Faixa infinita de logos; pausa no hover e acelera com a velocidade do scroll. */
 export function MarqueeRow({ items, direction, baseSpeed = 2.2 }: MarqueeRowProps) {
   const reduced = useReducedMotion();
+  const container = useRef<HTMLDivElement>(null);
+  const inView = useInView(container, { margin: "100px 0px" });
   const baseX = useMotionValue(0);
   const hovered = useRef(false);
   const speed = useRef(1);
@@ -43,7 +47,7 @@ export function MarqueeRow({ items, direction, baseSpeed = 2.2 }: MarqueeRowProp
   const x = useTransform(baseX, (value) => `${wrap(-50, 0, value)}%`);
 
   useAnimationFrame((_, delta) => {
-    if (reduced) return;
+    if (reduced || !inView) return;
     // Suaviza a pausa no hover.
     speed.current += ((hovered.current ? 0 : 1) - speed.current) * 0.08;
     const factor = velocityFactor.get();
@@ -57,6 +61,7 @@ export function MarqueeRow({ items, direction, baseSpeed = 2.2 }: MarqueeRowProp
 
   return (
     <div
+      ref={container}
       className="mask-fade-x overflow-hidden py-2"
       onPointerEnter={() => (hovered.current = true)}
       onPointerLeave={() => (hovered.current = false)}
@@ -68,7 +73,7 @@ export function MarqueeRow({ items, direction, baseSpeed = 2.2 }: MarqueeRowProp
             aria-hidden={index >= items.length ? true : undefined}
             className="mr-3 flex items-center gap-3 rounded-full border border-border px-5 py-3 text-text-muted transition-colors hover:border-accent/50 hover:text-text md:mr-4 md:px-6 md:py-4"
           >
-            {item.icon && <BrandIcon path={item.icon} className="size-5 md:size-6" />}
+            {item.icon && <BrandIcon id={item.icon} className="size-5 md:size-6" />}
             <span className="font-mono text-sm tracking-wide whitespace-nowrap md:text-base">
               {item.name}
             </span>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { flushSync } from "react-dom";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
@@ -20,10 +21,18 @@ export function ThemeToggle({ className }: { className?: string }) {
   const isDark = !mounted || resolvedTheme !== "light";
 
   const toggle = () => {
-    const root = document.documentElement;
-    root.classList.add("theme-transition");
-    setTheme(isDark ? "light" : "dark");
-    window.setTimeout(() => root.classList.remove("theme-transition"), 600);
+    const next = isDark ? "light" : "dark";
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Crossfade da página inteira via View Transitions API (quando disponível).
+    if (!reduced && typeof document.startViewTransition === "function") {
+      document.documentElement.dataset.themeSwitch = "";
+      const transition = document.startViewTransition(() => {
+        flushSync(() => setTheme(next));
+      });
+      transition.finished.finally(() => delete document.documentElement.dataset.themeSwitch);
+      return;
+    }
+    setTheme(next);
   };
 
   return (

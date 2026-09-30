@@ -18,6 +18,8 @@
   --text-muted: #8a8a8a;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
+  /* Texto "apagado" do manifesto: ainda com contraste ≥ 3:1 (texto grande). */
+  --text-dim: color-mix(in srgb, var(--text-muted) 72%, var(--bg));
   --grain-opacity: 0.055;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
@@ -38,6 +40,7 @@
   --text-muted: #6b6b6b;
   --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.16);
+  --text-dim: color-mix(in srgb, var(--text-muted) 92%, var(--bg));
   --grain-opacity: 0.04;
 
   color-scheme: light;
@@ -53,6 +56,7 @@
   --color-on-accent: var(--on-accent);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
 
@@ -92,18 +96,6 @@
 
   [id] {
     scroll-margin-top: var(--header-h);
-  }
-
-  /* Transição suave ao trocar de tema (só cores, sem layout). */
-  html.theme-transition,
-  html.theme-transition *,
-  html.theme-transition *::before,
-  html.theme-transition *::after {
-    transition:
-      background-color 0.5s var(--ease-out-expo),
-      border-color 0.5s var(--ease-out-expo),
-      color 0.5s var(--ease-out-expo),
-      fill 0.5s var(--ease-out-expo) !important;
   }
 }
 
@@ -247,9 +239,85 @@
   background-size: 220px 220px;
 }
 
-/* Preloader: escondido antes da pintura quando já foi visto na sessão ou com reduced motion. */
+/*
+ * Preloader em CSS puro: contador 000 → 100 (@property inteiros + counter) e cortina que sobe.
+ * Começa na primeira pintura, sem depender do JavaScript. Duração total ≈ 2,1 s.
+ */
+@property --preloader-h {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --preloader-r {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  animation: preloader-lift 0.8s var(--ease-out-expo) 1.3s both;
+}
+
+@media (min-width: 640px) {
+  .preloader {
+    padding: 2rem;
+  }
+}
+
+.preloader-count {
+  font-family: var(--font-mono);
+  font-size: clamp(4rem, 18vw, 14rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  counter-reset: preloader-h var(--preloader-h) preloader-r var(--preloader-r);
+  animation: preloader-count 1.15s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both;
+}
+
+.preloader-count::after {
+  content: counter(preloader-h) counter(preloader-r, decimal-leading-zero);
+}
+
+@keyframes preloader-count {
+  0% {
+    --preloader-h: 0;
+    --preloader-r: 0;
+  }
+  99.9% {
+    --preloader-h: 0;
+    --preloader-r: 99;
+  }
+  100% {
+    --preloader-h: 1;
+    --preloader-r: 0;
+  }
+}
+
+@keyframes preloader-lift {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Escondido antes da pintura quando já foi visto na sessão ou com reduced motion. */
 html[data-preloaded] .preloader {
   display: none;
+}
+
+/* Sem preloader, as linhas do título do hero começam atrás da máscara (o JS as revela). */
+html[data-preloaded] .hero-line {
+  transform: translateY(108%);
 }
 
 /* Fallback sem WebGL: estrelas em CSS. */
@@ -345,12 +413,19 @@ html.lenis body {
   overscroll-behavior: contain;
 }
 
-/* Cursor customizado ativo: esconde o cursor nativo (exceto em campos de texto). */
+/* Cursor customizado ativo: esconde o cursor nativo (sem seletor universal, que é caro). */
 @media (hover: hover) and (pointer: fine) {
   html.has-custom-cursor,
-  html.has-custom-cursor * {
+  html.has-custom-cursor :is(a, button, label, summary, [role="button"]) {
     cursor: none;
   }
+}
+
+/* Troca de tema: crossfade suave da página inteira. */
+html[data-theme-switch]::view-transition-old(root),
+html[data-theme-switch]::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease-out-expo);
 }
 
 /* Transições de página (View Transitions do React/Next). */
@@ -386,5 +461,72 @@ html.lenis body {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+}
+
+/* Manifesto: palavra apagada que acende com o scroll (--p do parágrafo, --n total, --i índice). */
+@property --p {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@supports (animation-timeline: view()) {
+  .lit-para {
+    animation: lit-progress linear both;
+    animation-timeline: view();
+    /* 0 quando o topo chega a 88% da tela; 1 quando o fim passa de 60%. */
+    animation-range: cover 12vh cover calc(100% - 60vh);
+  }
+}
+
+@keyframes lit-progress {
+  from {
+    --p: 0;
+  }
+  to {
+    --p: 1;
+  }
+}
+/* Cada palavra mistura a cor apagada com a cor final conforme --p (sem duplicar o texto). */
+.lit-word {
+  --lit: clamp(0, calc(var(--p, 0) * var(--n, 1) - var(--i, 0)), 1);
+  color: color-mix(in srgb, var(--text) calc(var(--lit) * 100%), var(--text-dim));
+}
+
+.lit-accent {
+  color: color-mix(in srgb, var(--accent) calc(var(--lit) * 100%), var(--text-dim));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lit-word {
+    --lit: 1;
+  }
+
+  .lit-para {
+    animation: none;
+  }
+}
+
+/* Parallax da foto do Sobre, só com CSS (roda fora do thread principal). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax-media {
+      animation: parallax-y linear both;
+      animation-timeline: --parallax;
+    }
+
+    .parallax-frame {
+      view-timeline: --parallax block;
+    }
+  }
+}
+
+@keyframes parallax-y {
+  from {
+    transform: translateY(-7%);
+  }
+  to {
+    transform: translateY(7%);
   }
 }

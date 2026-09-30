@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { ArrowDown, Download } from "lucide-react";
-import { RevealLines } from "@/components/ui/RevealLines";
+import { HeroTitle } from "./HeroTitle";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Counter } from "@/components/ui/Counter";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
@@ -50,19 +50,18 @@ export function HeroContent({ available, stats }: { available: boolean; stats: S
           {available ? t("statusAvailable") : t("statusUnavailable")}
         </motion.p>
 
-        <RevealLines
-          as="h1"
-          id="hero-title"
+        <HeroTitle
           play={play}
-          delay={0.1}
-          stagger={0.14}
           className="title-xl max-w-[16ch] text-balance"
           lines={[{ text: t("titleLine1") }, { text: t("titleLine2"), className: "text-accent" }]}
         />
 
         <div className="grid gap-8 md:grid-cols-12 md:items-end">
+          {/* Sem fade de opacidade: o subtítulo já é pintado com o HTML do servidor (LCP). */}
           <motion.p
-            {...fadeUp(0.45)}
+            initial={{ y: 24 }}
+            animate={play ? { y: 0 } : { y: 24 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.45 }}
             className="max-w-[46ch] text-lg leading-relaxed text-pretty text-text-muted md:col-span-6 md:text-xl"
           >
             {t("subtitle")}

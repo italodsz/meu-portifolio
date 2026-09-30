@@ -1,24 +1,17 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { motion } from "motion/react";
 import { EASE } from "@/lib/utils";
 
-/** Foto com duotone preto/vermelho, revelação por máscara e parallax leve. */
-export function AboutPhoto({ src, alt }: { src: string; alt: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["-7%", "7%"]);
-
+/**
+ * Foto com duotone preto/vermelho, revelação por máscara e parallax leve.
+ * O parallax usa scroll-driven animations do CSS (.parallax-frame/.parallax-media).
+ */
+export function AboutPhoto({ src, alt, label }: { src: string; alt: string; label: string }) {
   return (
-    <div
-      ref={ref}
-      className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-border"
-    >
-      <motion.div className="duotone absolute -inset-[8%]" style={{ y }}>
+    <div className="parallax-frame relative aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-border">
+      <div className="duotone parallax-media absolute -inset-[8%]">
         <Image
           src={src}
           alt={alt}
@@ -26,7 +19,7 @@ export function AboutPhoto({ src, alt }: { src: string; alt: string }) {
           sizes="(min-width: 1024px) 38vw, (min-width: 768px) 45vw, 100vw"
           className="object-cover"
         />
-      </motion.div>
+      </div>
       <motion.div
         aria-hidden="true"
         className="absolute inset-0 origin-top bg-accent"
@@ -36,7 +29,7 @@ export function AboutPhoto({ src, alt }: { src: string; alt: string }) {
         transition={{ duration: 1.1, ease: EASE }}
       />
       <span className="label-mono absolute bottom-4 left-4 rounded-full bg-bg/70 px-3 py-1.5 text-text backdrop-blur-md">
-        Campinas · SP
+        {label}
       </span>
     </div>
   );

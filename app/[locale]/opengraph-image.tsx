@@ -15,10 +15,11 @@ export function generateStaticParams() {
 export default async function OpenGraphImage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = toLocale((await params).locale);
   const t = await getTranslations({ locale, namespace: "Meta" });
+  const quoteT = await getTranslations({ locale, namespace: "Manifesto" });
   return renderOg({
     eyebrow: t("role"),
     title: siteConfig.name,
-    subtitle: siteConfig.quote.text,
+    subtitle: quoteT("quote"),
     footer: `${siteConfig.location.city} · ${siteConfig.location.coordinates}`,
   });
 }

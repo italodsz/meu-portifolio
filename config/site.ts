@@ -36,10 +36,6 @@ export const siteConfig = {
     coordinates: "22°54'S 47°03'W",
     timeZone: "America/Sao_Paulo",
   },
-  quote: {
-    text: "Shoot for the moon. Even if you miss, you'll land among the stars.",
-    author: "Les Brown",
-  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

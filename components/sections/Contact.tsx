@@ -8,7 +8,10 @@ import { siteConfig } from "@/config/site";
 
 export async function Contact() {
   const t = await getTranslations("Contact");
-  const { contact, quote } = siteConfig;
+  const quoteT = await getTranslations("Manifesto");
+  const { contact } = siteConfig;
+  const quote = quoteT("quote");
+  const accentWords = new Set(["moon", "stars", "lua", "estrelas"]);
 
   return (
     <section
@@ -74,8 +77,8 @@ export async function Contact() {
           <figure className="flex flex-col items-center gap-5">
             <blockquote className="text-[clamp(1.5rem,3.4vw,3rem)] leading-tight font-semibold tracking-tight text-balance">
               “
-              {quote.text.split(/(moon|stars)/).map((part, index) =>
-                part === "moon" || part === "stars" ? (
+              {quote.split(/(moon|stars|lua|estrelas)/gi).map((part, index) =>
+                accentWords.has(part.toLowerCase()) ? (
                   <span key={index} className="text-accent">
                     {part}
                   </span>
@@ -85,7 +88,9 @@ export async function Contact() {
               )}
               ”
             </blockquote>
-            <figcaption className="label-mono text-text-muted">— {quote.author}</figcaption>
+            <figcaption className="label-mono text-text-muted">
+              — {quoteT("quoteAuthor")}
+            </figcaption>
           </figure>
         </Reveal>
       </div>

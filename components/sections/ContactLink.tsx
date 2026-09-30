@@ -25,7 +25,7 @@ export function ContactLink({ href, label, value, icon, external = true }: Conta
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="group relative flex items-center justify-between gap-6 overflow-hidden border-b border-border py-6 md:py-8"
+      className="group relative flex items-center justify-between gap-6 overflow-hidden border-b border-border py-6 sm:pl-3 md:py-8"
     >
       <span
         aria-hidden="true"

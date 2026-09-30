@@ -406,8 +406,21 @@ Decisões tomadas durante a implementação que não estavam cobertas pelo brief
   - `accent-ink` — vermelho para textos pequenos (`#FF2D20` no escuro, `#C41E15` no claro; o `#E0241A` do claro tem só ~4,2:1 sobre o fundo creme).
   - `on-accent` — cor do texto sobre fundo vermelho (`#0A0A0A` no escuro, `#FFFFFF` no claro).
   - `border-strong` — borda um pouco mais visível para hovers e divisores.
-- **Tema**: next-themes com `attribute="data-theme"`, escuro padrão, sem seguir o sistema. A troca adiciona a classe `theme-transition` por 600 ms para animar só cores.
-- **Preloader**: um script inline no `<head>` marca `<html data-preloaded>` antes da pintura quando o preloader já foi visto na sessão (`sessionStorage`) ou com reduced motion — assim não há flash da cortina.
+- **Tema**: next-themes com `attribute="data-theme"`, escuro padrão, sem seguir o sistema. A troca faz um crossfade da página com a View Transitions API (`document.startViewTransition`); sem suporte, troca direto. Evitamos seletores universais (`html.x *`) porque cada mudança de classe no `<html>` recalcularia o CSS da página inteira.
+- **Preloader**: 100% CSS (contador com `@property` inteiros + `counter()`, cortina com `@keyframes`), então começa na primeira pintura sem esperar o JS. O componente só sincroniza a revelação do hero com o início da subida da cortina, trava o scroll e grava a sessão. Um script inline no `<head>` marca `<html data-preloaded>` antes da pintura quando o preloader já foi visto na sessão (`sessionStorage`) ou com reduced motion — assim não há flash da cortina.
+- **Título do hero**: vem visível no HTML do servidor (a primeira pintura conta para o LCP, por baixo da cortina); depois da hidratação as linhas descem para trás da máscara e sobem quando a cortina começa a subir. Em visitas repetidas, o CSS `html[data-preloaded] .hero-line` esconde as linhas antes da pintura.
+- **Manifesto**: cada palavra é uma `<span>` do servidor com `--i` (índice); o parágrafo tem `--n` (total) e `--p` (progresso 0–1). A cor da palavra é `color-mix()` entre `text-dim` e `text`/`accent` calculada em CSS. `--p` é animado por scroll-driven animations (`animation-timeline: view()`); onde não há suporte, `LitParagraph` usa `scroll()` do Motion. O estado "apagado" (`--text-dim`) mantém contraste ≥ 3:1 (texto grande). O parallax da foto do Sobre também é scroll-driven em CSS.
+- **Ícones de marca**: servidos como sprite estático em `/icons.svg` (`app/icons.svg/route.ts`) e referenciados com `<use>` — os paths não vão no HTML nem no payload RSC.
+- **Lenis**: só em telas com mouse (`(hover: hover) and (pointer: fine)`). No toque o scroll nativo já é suave e o Lenis só custaria processamento (era o maior custo de JS no Lighthouse mobile).
+- **Não usar `<Suspense>` em volta das seções** da home: com componentes assíncronos, o React passa a fazer streaming fora de ordem e o conteúdo só aparece depois de scripts inline (e nunca sem JS).
+- **CSS inline** (`experimental.inlineCss`): o Tailwind gera pouco CSS; inline no `<head>` remove o request que bloqueia a primeira pintura.
 - **Logos**: `simple-icons` não tem LinkedIn, Oracle, Power BI nem Excel. LinkedIn usa um SVG próprio; os outros aparecem só com o nome.
 - **GitHub**: `lib/github.ts` usa `fetch` com `revalidate: 3600`, timeout de 6 s e cai para `data/github-fallback.json` se a API falhar. Linguagens somadas só de repositórios que não são fork.
+- **Cena 3D**:
+  - Só entra com WebGL acelerado por hardware (`failIfMajorPerformanceCaveat` + checagem do renderer). Renderização por software (SwiftShader, llvmpipe — inclusive a do Lighthouse/PageSpeed) fica com o céu em CSS. Para testar a cena num navegador sem GPU, abra a página com `?webgl=force`.
+  - Carrega na primeira interação (mouse, toque, scroll, teclado) ou 4,5 s depois da intro, o que vier primeiro.
+  - O relevo da lua (crateras + mares) é calculado uma vez na GPU e gravado num cubemap com mipmaps (`components/three/bakeRelief.ts`); a cada frame o shader só lê o cubemap e calcula a normal por diferenças finitas.
+  - A narrativa por seção fica em `components/three/narrative.ts`, com posições em coordenadas de tela. Telas em pé (proporção < 1) usam outra composição (lua centralizada e menor no hero; o hero reserva `40svh` no topo).
+  - Os objetos do three.js são alterados de forma imperativa dentro do `useFrame` (padrão do R3F); por isso a regra `react-hooks/immutability` está desligada só em `components/three/**`.
+- **Diagnóstico de performance**: `ANALYZE_SOURCEMAPS=1 npm run build` gera source maps de produção para perfilar localmente.
 - **Textos de projeto**: `context`, `problem`, `solution` e `role` em `data/projects.ts` foram escritos a partir das descrições do brief e precisam ser revisados pelo Ítalo.

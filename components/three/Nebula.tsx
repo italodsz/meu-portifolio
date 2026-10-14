@@ -5,6 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { AdditiveBlending, Color, type Mesh, type ShaderMaterial } from "three";
 import { nebulaFragment, nebulaVertex } from "./shaders/nebula";
 import { live } from "./live";
+import { scenePalette } from "./palette";
 
 /** Névoa vermelha quase imperceptível atrás das estrelas (só no tema escuro). */
 export function Nebula() {
@@ -14,7 +15,7 @@ export function Nebula() {
     () => ({
       uTime: { value: 0 },
       uOpacity: { value: 0.1 },
-      uColor: { value: new Color("#ff2d20") },
+      uColor: { value: new Color(scenePalette.nebula) },
     }),
     [],
   );

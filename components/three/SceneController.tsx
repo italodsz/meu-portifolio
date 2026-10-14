@@ -13,9 +13,10 @@ import {
   type SceneKey,
 } from "./narrative";
 import { sceneState } from "@/lib/scene-store";
+import { scenePalette } from "./palette";
 
-const DARK_BG = new Color("#0a0a0a");
-const LIGHT_BG = new Color("#f4f1ec");
+const DARK_BG = new Color(scenePalette.background.dark);
+const LIGHT_BG = new Color(scenePalette.background.light);
 
 type Props = { theme: "dark" | "light"; mobile: boolean; reduced: boolean };
 

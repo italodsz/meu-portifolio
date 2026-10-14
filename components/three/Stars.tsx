@@ -13,6 +13,7 @@ import {
 } from "three";
 import { starsFragment, starsVertex } from "./shaders/stars";
 import { live } from "./live";
+import { scenePalette } from "./palette";
 
 /** Gerador pseudoaleatório com semente (o céu é sempre o mesmo). */
 function mulberry32(seed: number) {
@@ -26,11 +27,11 @@ function mulberry32(seed: number) {
 }
 
 const PALETTE = [
-  { color: new Color("#ff3b2f"), weight: 0.34 },
-  { color: new Color("#ff6a5c"), weight: 0.26 },
-  { color: new Color("#ffb3aa"), weight: 0.22 },
-  { color: new Color("#ffd9d4"), weight: 0.12 },
-  { color: new Color("#fff4f2"), weight: 0.06 },
+  { color: new Color(scenePalette.stars[0]), weight: 0.34 },
+  { color: new Color(scenePalette.stars[1]), weight: 0.26 },
+  { color: new Color(scenePalette.stars[2]), weight: 0.2 },
+  { color: new Color(scenePalette.stars[3]), weight: 0.12 },
+  { color: new Color(scenePalette.stars[4]), weight: 0.08 },
 ];
 
 const LAYERS = [
@@ -114,7 +115,7 @@ export function Stars({ count }: { count: number }) {
       uScroll: { value: 0 },
       uOpacity: { value: 1 },
       uLightMode: { value: 0 },
-      uLightColor: { value: new Color("#a3170f") },
+      uLightColor: { value: new Color(scenePalette.starsLight) },
     }),
     [],
   );

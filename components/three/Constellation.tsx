@@ -18,6 +18,7 @@ import {
 } from "three";
 import { live, screenToCamera } from "./live";
 import { sceneState } from "@/lib/scene-store";
+import { scenePalette } from "./palette";
 
 const DISTANCE = 20;
 const SEGMENT_POINTS = 40;
@@ -55,8 +56,8 @@ function glowTexture() {
     );
     gradient.addColorStop(0, "rgba(255,255,255,1)");
     gradient.addColorStop(0.12, "rgba(255,220,214,0.95)");
-    gradient.addColorStop(0.35, "rgba(255,90,69,0.35)");
-    gradient.addColorStop(1, "rgba(255,45,32,0)");
+    gradient.addColorStop(0.35, scenePalette.constellationGlow[0]);
+    gradient.addColorStop(1, scenePalette.constellationGlow[1]);
     context.fillStyle = gradient;
     context.fillRect(0, 0, size, size);
   }
@@ -79,7 +80,7 @@ export function Constellation() {
     geometry.setAttribute("position", new BufferAttribute(new Float32Array(total * 3), 3));
     geometry.setDrawRange(0, 0);
     const material = new LineBasicMaterial({
-      color: new Color("#ff5a45"),
+      color: new Color(scenePalette.constellation.line),
       transparent: true,
       opacity: 0,
       depthWrite: false,
@@ -131,7 +132,9 @@ export function Constellation() {
     const blending = live.theme > 0.5 ? NormalBlending : AdditiveBlending;
     if (lineMaterial.blending !== blending) {
       lineMaterial.blending = blending;
-      lineMaterial.color.set(live.theme > 0.5 ? "#c41e15" : "#ff5a45");
+      lineMaterial.color.set(
+        live.theme > 0.5 ? scenePalette.constellation.lineLight : scenePalette.constellation.line,
+      );
       lineMaterial.needsUpdate = true;
     }
 
@@ -152,7 +155,7 @@ export function Constellation() {
       const spriteBlending = live.theme > 0.5 ? NormalBlending : AdditiveBlending;
       if (material.blending !== spriteBlending) {
         material.blending = spriteBlending;
-        material.color.set(live.theme > 0.5 ? "#c41e15" : "#ffffff");
+        material.color.set(live.theme > 0.5 ? scenePalette.constellation.starLight : "#ffffff");
         material.needsUpdate = true;
       }
     });

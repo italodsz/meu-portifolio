@@ -16,6 +16,7 @@ import {
 import { haloFragment, haloVertex, moonFragment, moonVertex } from "./shaders/moon";
 import { live, screenToCamera } from "./live";
 import { bakeRelief } from "./bakeRelief";
+import { scenePalette } from "./palette";
 
 const DISTANCE = 10;
 const HALO_SCALE = 1.22;
@@ -44,10 +45,10 @@ export function Moon({ segments = 96, reliefSize = 1024, bloom = true }: MoonPro
       uModelRot: { value: new Matrix3() },
       uEps: { value: 1.5 / reliefSize },
       uLightDir: { value: new Vector3(0.42, 0.48, 0.77).normalize() },
-      uColorLow: { value: new Color("#2e0604") },
-      uColorHigh: { value: new Color("#e0503f") },
-      uShadow: { value: new Color("#0d0101") },
-      uRim: { value: new Color("#ff2d20") },
+      uColorLow: { value: new Color(scenePalette.moon.low) },
+      uColorHigh: { value: new Color(scenePalette.moon.high) },
+      uShadow: { value: new Color(scenePalette.moon.shadow) },
+      uRim: { value: new Color(scenePalette.moon.rim) },
       uRimStrength: { value: 1.4 },
       uBump: { value: 0.22 },
       uFade: { value: 1 },
@@ -57,7 +58,7 @@ export function Moon({ segments = 96, reliefSize = 1024, bloom = true }: MoonPro
 
   const haloUniforms = useMemo(
     () => ({
-      uColor: { value: new Color("#ff2d20") },
+      uColor: { value: new Color(scenePalette.moon.halo) },
       uStrength: { value: 0.9 },
       uEdge: { value: Math.sqrt(1 - 1 / (HALO_SCALE * HALO_SCALE)) },
     }),
@@ -102,11 +103,11 @@ export function Moon({ segments = 96, reliefSize = 1024, bloom = true }: MoonPro
     if (material.current) {
       material.current.uniforms.uFade.value = key.moonFade * MathUtils.lerp(1, 0.85, light);
       material.current.uniforms.uRimStrength.value =
-        MathUtils.lerp(1.4, 0.6, light) * (bloom ? 1 : 0.6);
+        MathUtils.lerp(0.55, 0.25, light) * (bloom ? 1 : 0.6);
     }
     if (haloMaterial.current) {
       haloMaterial.current.uniforms.uStrength.value =
-        key.moonFade * MathUtils.lerp(0.7, 0.12, light) * (bloom ? 1 : 0.35);
+        key.moonFade * MathUtils.lerp(0.75, 0.12, light) * (bloom ? 1 : 0.35);
     }
   });
 

@@ -5,17 +5,17 @@
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 :root {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-2: #1c1c1c;
-  --accent: #ff2d20;
-  --accent-glow: #ff5a45;
-  /* Vermelho para textos pequenos: garante contraste AA nos dois temas. */
-  --accent-ink: #ff2d20;
-  /* Cor do texto sobre fundo vermelho (AA). */
-  --on-accent: #0a0a0a;
-  --text: #f5f5f5;
-  --text-muted: #8a8a8a;
+  --bg: #08070b;
+  --surface: #121019;
+  --surface-2: #1b1824;
+  --accent: #9d7bff;
+  --accent-glow: #c4b5fd;
+  /* Destaque para textos pequenos: garante contraste AA nos dois temas. */
+  --accent-ink: #9d7bff;
+  /* Cor do texto sobre fundo de destaque (AA). */
+  --on-accent: #0b0a10;
+  --text: #f4f2f8;
+  --text-muted: #8d8899;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
   /* Texto "apagado" do manifesto: ainda com contraste ≥ 3:1 (texto grande). */
@@ -29,15 +29,15 @@
 }
 
 [data-theme="light"] {
-  --bg: #f4f1ec;
+  --bg: #f6f5fa;
   --surface: #ffffff;
-  --surface-2: #eae6e0;
-  --accent: #e0241a;
-  --accent-glow: #ff4a38;
-  --accent-ink: #c41e15;
+  --surface-2: #ebe8f3;
+  --accent: #6d3fe0;
+  --accent-glow: #8b5cf6;
+  --accent-ink: #6d3fe0;
   --on-accent: #ffffff;
-  --text: #111111;
-  --text-muted: #6b6b6b;
+  --text: #121016;
+  --text-muted: #615c6e;
   --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.16);
   --text-dim: color-mix(in srgb, var(--text-muted) 92%, var(--bg));
@@ -208,7 +208,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: #0a0a0a;
+    background: var(--bg);
     mix-blend-mode: lighten;
     pointer-events: none;
   }
@@ -350,20 +350,20 @@ html[data-preloaded] .hero-line {
 
 .css-sky::before {
   background-image:
-    radial-gradient(1px 1px at 20px 30px, #ffd6d1, transparent),
-    radial-gradient(1px 1px at 120px 80px, #ff6a5c, transparent),
-    radial-gradient(1.5px 1.5px at 200px 160px, #fff1ef, transparent),
-    radial-gradient(1px 1px at 60px 190px, #ff8a7e, transparent),
-    radial-gradient(1px 1px at 260px 40px, #ffc2bb, transparent);
+    radial-gradient(1px 1px at 20px 30px, #ece6ff, transparent),
+    radial-gradient(1px 1px at 120px 80px, #b9a7ff, transparent),
+    radial-gradient(1.5px 1.5px at 200px 160px, #ffffff, transparent),
+    radial-gradient(1px 1px at 60px 190px, #cfc4ff, transparent),
+    radial-gradient(1px 1px at 260px 40px, #e2dbff, transparent);
   background-size: 300px 220px;
   opacity: 0.7;
 }
 
 .css-sky::after {
   background-image:
-    radial-gradient(1px 1px at 50px 90px, #ff4a3d, transparent),
-    radial-gradient(2px 2px at 160px 20px, #fff5f4, transparent),
-    radial-gradient(1px 1px at 230px 130px, #ffb3aa, transparent);
+    radial-gradient(1px 1px at 50px 90px, #9d7bff, transparent),
+    radial-gradient(2px 2px at 160px 20px, #fffaf2, transparent),
+    radial-gradient(1px 1px at 230px 130px, #d9cfff, transparent);
   background-size: 420px 340px;
   opacity: 0.5;
 }

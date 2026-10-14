@@ -16,9 +16,9 @@ export default async function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0a0a0a",
+        background: "#08070b",
         borderRadius: 14,
-        color: "#f5f5f5",
+        color: "#f4f2f8",
         fontFamily: "Geist",
         fontSize: 30,
         fontWeight: 700,
@@ -26,7 +26,7 @@ export default async function Icon() {
         paddingTop: 4,
       }}
     >
-      ÍS<span style={{ color: "#ff2d20" }}>.</span>
+      ÍS<span style={{ color: "#9d7bff" }}>.</span>
     </div>,
     { ...size, fonts: [{ name: "Geist", data: bold, style: "normal", weight: 700 }] },
   );

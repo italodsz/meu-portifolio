@@ -5,6 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { AdditiveBlending, Color, type Mesh, type ShaderMaterial } from "three";
 import { streakFragment, streakVertex } from "./shaders/streak";
 import { live, screenToCamera } from "./live";
+import { scenePalette } from "./palette";
 
 const DISTANCE = 30;
 
@@ -24,7 +25,7 @@ export function ShootingStar() {
   const next = useRef(-1);
   const flight = useRef<Flight | null>(null);
   const uniforms = useMemo(
-    () => ({ uOpacity: { value: 0 }, uColor: { value: new Color("#ffd2cc") } }),
+    () => ({ uOpacity: { value: 0 }, uColor: { value: new Color(scenePalette.shootingStar) } }),
     [],
   );
 

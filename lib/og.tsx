@@ -38,8 +38,8 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
         height: "100%",
         display: "flex",
         position: "relative",
-        background: "#0a0a0a",
-        color: "#f5f5f5",
+        background: "#08070b",
+        color: "#f4f2f8",
         fontFamily: "Geist",
         overflow: "hidden",
       }}
@@ -52,7 +52,8 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
           width: moon + 240,
           height: moon + 240,
           borderRadius: 9999,
-          background: "radial-gradient(circle, rgba(255,45,32,0.35) 0%, rgba(255,45,32,0) 65%)",
+          background:
+            "radial-gradient(circle, rgba(255,241,214,0.28) 0%, rgba(124,77,255,0.12) 40%, rgba(124,77,255,0) 65%)",
           display: "flex",
         }}
       />
@@ -65,7 +66,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
           height: moon,
           borderRadius: 9999,
           background:
-            "radial-gradient(circle at 70% 30%, #ff7a66 0%, #e0503f 30%, #7a130b 62%, #1a0302 100%)",
+            "radial-gradient(circle at 70% 30%, #fffaf0 0%, #ece2cd 30%, #9d978c 62%, #2a2826 100%)",
           display: "flex",
         }}
       >
@@ -80,7 +81,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
               height: `${crater.r * 2}%`,
               borderRadius: 9999,
               background:
-                "radial-gradient(circle at 60% 40%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 55%, rgba(255,160,140,0.25) 72%, rgba(0,0,0,0) 80%)",
+                "radial-gradient(circle at 60% 40%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 55%, rgba(255,250,235,0.22) 72%, rgba(0,0,0,0) 80%)",
               display: "flex",
             }}
           />
@@ -98,7 +99,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
         }}
       >
         <div style={{ display: "flex", fontSize: 40, fontWeight: 700, letterSpacing: -1 }}>
-          ÍS<span style={{ color: "#ff2d20" }}>.</span>
+          ÍS<span style={{ color: "#9d7bff" }}>.</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18, maxWidth: 820 }}>
           <div
@@ -108,7 +109,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
               fontSize: 22,
               letterSpacing: 4,
               textTransform: "uppercase",
-              color: "#ff2d20",
+              color: "#9d7bff",
             }}
           >
             {eyebrow}
@@ -124,7 +125,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
           >
             {title}
           </div>
-          <div style={{ display: "flex", fontSize: 32, color: "#b5b5b5", lineHeight: 1.3 }}>
+          <div style={{ display: "flex", fontSize: 32, color: "#b8b3c4", lineHeight: 1.3 }}>
             {subtitle}
           </div>
         </div>
@@ -135,7 +136,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
             fontSize: 18,
             letterSpacing: 3,
             textTransform: "uppercase",
-            color: "#8a8a8a",
+            color: "#8d8899",
           }}
         >
           {footer}

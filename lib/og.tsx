@@ -53,7 +53,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
           height: moon + 240,
           borderRadius: 9999,
           background:
-            "radial-gradient(circle, rgba(255,241,214,0.28) 0%, rgba(124,77,255,0.12) 40%, rgba(124,77,255,0) 65%)",
+            "radial-gradient(circle, rgba(255,241,214,0.28) 0%, rgba(102,0,204,0.12) 40%, rgba(102,0,204,0) 65%)",
           display: "flex",
         }}
       />
@@ -99,7 +99,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
         }}
       >
         <div style={{ display: "flex", fontSize: 40, fontWeight: 700, letterSpacing: -1 }}>
-          ÍS<span style={{ color: "#9d7bff" }}>.</span>
+          ÍS<span style={{ color: "#8533ff" }}>.</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18, maxWidth: 820 }}>
           <div
@@ -109,7 +109,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
               fontSize: 22,
               letterSpacing: 4,
               textTransform: "uppercase",
-              color: "#9d7bff",
+              color: "#8533ff",
             }}
           >
             {eyebrow}

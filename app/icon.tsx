@@ -26,7 +26,7 @@ export default async function Icon() {
         paddingTop: 4,
       }}
     >
-      ÍS<span style={{ color: "#9d7bff" }}>.</span>
+      ÍS<span style={{ color: "#8533ff" }}>.</span>
     </div>,
     { ...size, fonts: [{ name: "Geist", data: bold, style: "normal", weight: 700 }] },
   );

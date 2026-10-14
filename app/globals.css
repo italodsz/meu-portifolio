@@ -8,12 +8,13 @@
   --bg: #08070b;
   --surface: #121019;
   --surface-2: #1b1824;
-  --accent: #9d7bff;
-  --accent-glow: #c4b5fd;
+  /* Mesmo matiz do #6600cc, mais claro para ter contraste sobre o preto (3,7:1). */
+  --accent: #8533ff;
+  --accent-glow: #a366ff;
   /* Destaque para textos pequenos: garante contraste AA nos dois temas. */
-  --accent-ink: #9d7bff;
+  --accent-ink: #9955ff;
   /* Cor do texto sobre fundo de destaque (AA). */
-  --on-accent: #0b0a10;
+  --on-accent: #ffffff;
   --text: #f4f2f8;
   --text-muted: #8d8899;
   --border: rgba(255, 255, 255, 0.08);
@@ -32,9 +33,9 @@
   --bg: #f6f5fa;
   --surface: #ffffff;
   --surface-2: #ebe8f3;
-  --accent: #6d3fe0;
-  --accent-glow: #8b5cf6;
-  --accent-ink: #6d3fe0;
+  --accent: #6600cc;
+  --accent-glow: #7a1fff;
+  --accent-ink: #6600cc;
   --on-accent: #ffffff;
   --text: #121016;
   --text-muted: #615c6e;
@@ -351,9 +352,9 @@ html[data-preloaded] .hero-line {
 .css-sky::before {
   background-image:
     radial-gradient(1px 1px at 20px 30px, #ece6ff, transparent),
-    radial-gradient(1px 1px at 120px 80px, #b9a7ff, transparent),
+    radial-gradient(1px 1px at 120px 80px, #a366ff, transparent),
     radial-gradient(1.5px 1.5px at 200px 160px, #ffffff, transparent),
-    radial-gradient(1px 1px at 60px 190px, #cfc4ff, transparent),
+    radial-gradient(1px 1px at 60px 190px, #b98aff, transparent),
     radial-gradient(1px 1px at 260px 40px, #e2dbff, transparent);
   background-size: 300px 220px;
   opacity: 0.7;
@@ -361,7 +362,7 @@ html[data-preloaded] .hero-line {
 
 .css-sky::after {
   background-image:
-    radial-gradient(1px 1px at 50px 90px, #9d7bff, transparent),
+    radial-gradient(1px 1px at 50px 90px, #8533ff, transparent),
     radial-gradient(2px 2px at 160px 20px, #fffaf2, transparent),
     radial-gradient(1px 1px at 230px 130px, #d9cfff, transparent);
   background-size: 420px 340px;

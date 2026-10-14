@@ -103,11 +103,11 @@ export function Moon({ segments = 96, reliefSize = 1024, bloom = true }: MoonPro
     if (material.current) {
       material.current.uniforms.uFade.value = key.moonFade * MathUtils.lerp(1, 0.85, light);
       material.current.uniforms.uRimStrength.value =
-        MathUtils.lerp(0.55, 0.25, light) * (bloom ? 1 : 0.6);
+        MathUtils.lerp(1.4, 0.6, light) * (bloom ? 1 : 0.6);
     }
     if (haloMaterial.current) {
       haloMaterial.current.uniforms.uStrength.value =
-        key.moonFade * MathUtils.lerp(0.45, 0.1, light) * (bloom ? 1 : 0.35);
+        key.moonFade * MathUtils.lerp(0.75, 0.12, light) * (bloom ? 1 : 0.35);
     }
   });
 

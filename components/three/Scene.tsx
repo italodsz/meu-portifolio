@@ -67,7 +67,7 @@ export default function Scene({ theme, mobile, reduced, onReady }: SceneProps) {
           <Bloom
             mipmapBlur
             intensity={0.85}
-            luminanceThreshold={0.75}
+            luminanceThreshold={0.65}
             luminanceSmoothing={0.3}
             radius={0.72}
           />

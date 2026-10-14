@@ -2,12 +2,12 @@
 export const scenePalette = {
   background: { dark: "#08070b", light: "#f6f5fa" },
   moon: {
-    /** Lua "de verdade": cinza nos mares, creme claro nas terras altas. */
-    low: "#5f5a52",
-    high: "#cfc5b1",
-    shadow: "#050506",
-    rim: "#e8dcc4",
-    halo: "#d9cbb0",
+    /** Lua roxa: violeta escuro nos mares, lavanda nas terras altas, borda no roxo do site. */
+    low: "#26084f",
+    high: "#b07dff",
+    shadow: "#07020f",
+    rim: "#8533ff",
+    halo: "#6600cc",
   },
   stars: ["#ffffff", "#efe6ff", "#d2b8ff", "#a36bff", "#fff4e6"],
   starsLight: "#4d0099",

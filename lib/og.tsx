@@ -52,8 +52,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
           width: moon + 240,
           height: moon + 240,
           borderRadius: 9999,
-          background:
-            "radial-gradient(circle, rgba(255,241,214,0.28) 0%, rgba(102,0,204,0.12) 40%, rgba(102,0,204,0) 65%)",
+          background: "radial-gradient(circle, rgba(133,51,255,0.35) 0%, rgba(102,0,204,0) 65%)",
           display: "flex",
         }}
       />
@@ -66,7 +65,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
           height: moon,
           borderRadius: 9999,
           background:
-            "radial-gradient(circle at 70% 30%, #fffaf0 0%, #ece2cd 30%, #9d978c 62%, #2a2826 100%)",
+            "radial-gradient(circle at 70% 30%, #c9a3ff 0%, #8533ff 30%, #3d0a7a 62%, #0d0418 100%)",
           display: "flex",
         }}
       >
@@ -81,7 +80,7 @@ export async function renderOg({ eyebrow, title, subtitle, footer }: OgOptions) 
               height: `${crater.r * 2}%`,
               borderRadius: 9999,
               background:
-                "radial-gradient(circle at 60% 40%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 55%, rgba(255,250,235,0.22) 72%, rgba(0,0,0,0) 80%)",
+                "radial-gradient(circle at 60% 40%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 55%, rgba(220,195,255,0.25) 72%, rgba(0,0,0,0) 80%)",
               display: "flex",
             }}
           />
